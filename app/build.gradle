@@ -66,7 +66,8 @@ task checkDebug {
 
 private void checkApplicationIdInDebug() {
     Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    if (project.rootProject.file('local.properties').exists())
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
     def ignoreApplicationIdCheck = properties.getProperty('ignoreApplicationIdCheck')
     if (ignoreApplicationIdCheck == null) {
         if (android.defaultConfig.applicationId == "com.example.samplestickerapp") {
